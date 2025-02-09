@@ -1,6 +1,7 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
+import order.Order;
 import order.OrderCreationSteps;
 import org.junit.After;
 import org.junit.Before;
@@ -40,7 +41,7 @@ public class OrderTest {
     @DisplayName("Создание заказа")
     @Description("Создание заказа с разными цветами самокатов " +
             "либо вообще без указанного цвета и проверка, что значение 'track' в ответе не пустое и код ответа 200")
-    public void OrderCreate() {
+    /*public void OrderCreate() {
         String firstName = "Tatyana";
         String lastName = "Belanova";
         String address = "Dostyk, 10";
@@ -50,6 +51,26 @@ public class OrderTest {
         String deliveryDate = "2025-06-06";
         String comment = "А вообще, я хотела розовый";
         Response response = OrderCreationSteps.OrderTest(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color);
+        track = response.jsonPath().getInt("track");
+        OrderCreationSteps.orderCreationSuccess(response);
+    }*/
+
+    public void OrderCreate() {
+        // Используем Builder для создания объекта Order с дефолтными значениями
+        Order order = Order.builder()
+                .firstName("Tatyana")
+                .lastName("Belanova")
+                .address("Dostyk, 10")
+                .metroStation(2)
+                .phone("+7 700 777 77 77")
+                .rentTime(2)
+                .deliveryDate("2025-06-06")
+                .comment("А вообще, я хотела розовый")
+                .color(color) // Передаем список цветов
+                .build();
+
+        // Создаем заказ
+        Response response = OrderCreationSteps.OrderTest(order);
         track = response.jsonPath().getInt("track");
         OrderCreationSteps.orderCreationSuccess(response);
     }

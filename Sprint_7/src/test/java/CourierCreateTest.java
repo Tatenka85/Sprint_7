@@ -54,7 +54,7 @@ public class CourierCreateTest {
     }
 
     @Test
-    @DisplayName("Невозможность создать курьера, если не ввести логин или пароль")
+    @DisplayName("Невозможность создать курьера, если не ввести логин")
     @Description("Проверка, что возвращаемые тело ответа 'message: Недостаточно данных для создания учетной записи' и код ответа '400'")
     public void checkResponseWithoutLogin() {
         Response response = CourierCreateSteps.createCourier("", password, firstName);
@@ -62,7 +62,7 @@ public class CourierCreateTest {
     }
 
     @Test
-    @DisplayName("Невозможность создать курьера, если не ввести логин или пароль")
+    @DisplayName("Невозможность создать курьера, если не ввести пароль")
     @Description("Проверка, что возвращаемые тело ответа 'message: Недостаточно данных для создания учетной записи' и код ответа '400'")
     public void checkResponseWithoutPassword() {
         Response response = CourierCreateSteps.createCourier(login, "", firstName);
